@@ -27,7 +27,7 @@ describe('database', () => {
 	})
 })
 
-describe('fetch customers', () => {
+describe('fetch operations', () => {
   it('should fetch some customers', done => {
     fetchCustomers(1, 100)
     .then(customers => {
