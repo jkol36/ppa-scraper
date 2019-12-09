@@ -30,8 +30,9 @@ describe('fetch operations', () => {
     it('should get badges', done => {
       getBadges(1, 10)
       .then(res => {
+        expect(res.body.data).to.be.an.array;
+        expect(res.body.data.length).to.be.gt(0);
         expect(res.body.data[0].badge_number).to.not.be.null;
-        res.body.data.forEach(badge => badges.push(badge));
         done()
       })
     })
