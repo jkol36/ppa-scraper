@@ -15,7 +15,7 @@ function start() {
     if(customers.length === 1369) {
         console.log(true)
         return saveCustomersInMongo().then(() => {
-            return mongoose.model('customers').count().then(console.log('saved', count))
+            return mongoose.model('customers').countDocuments().then(console.log('saved mongo', count))
         })
     }
     const { dispatch } = store;
@@ -38,8 +38,8 @@ function saveCustomersInMongo() {
                 saved+=1
                 console.log('saved', saved)
                 if(saved === 1369) {
-                    mongoose.model('customers').count().then(res => {
-                        console.log(res)
+                    mongoose.model('customers').countDocuments().then(res => {
+                        console.log(res, 'exiting')
                         process.exit()
                     })
                 }
@@ -49,6 +49,10 @@ function saveCustomersInMongo() {
     console.log('saving', store.getState().customers.length)
 }
 
+function removeDocuments(collection) {
+    return mongoose.model(collection).remove()
+}
 
 initializeDatabase()
+.then(removeDocuments.bind(this, 'customers'))
 .then(() => start())
