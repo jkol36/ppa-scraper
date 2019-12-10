@@ -61,11 +61,3 @@ export function getBatchReciepts() {
     .then(res => res)
     .catch(err => err)
 }
-
-export function getBatchIds() {
-    return agent
-    .get(`http://garages.philapark.org/transaction_batches/deposits/batch_ids.json'`)
-    .set(headers)
-    .then(res => res)
-    .catch(res => res)
-}

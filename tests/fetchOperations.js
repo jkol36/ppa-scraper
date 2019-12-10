@@ -77,11 +77,4 @@ describe('fetch operations', () => {
       })
       .catch(done)
     })
-    it('should get batch ids', done => {
-      getBatchIds()
-      .then(res => {
-        console.log(res)
-        done()
-      })
-    })
   })
