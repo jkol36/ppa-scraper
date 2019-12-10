@@ -42,7 +42,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "start": "^5.1.0",
-    "superagent": "^3.8.3",
+    "superagent": "^5.1.2",
     "superagent-bluebird-promise": "^4.2.0"
   }
 }
