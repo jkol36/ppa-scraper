@@ -13,8 +13,8 @@ export const customers = (state=[], action) => {
 
 export const page = (state=1, action) => {
   switch(action.type) {
-    case C.INCREMENT:
-      return state + action.payload // where payload is a number
+    case C.CHANGE_PAGE:
+      return action.page // where payload is a number
     default:
       return state
   }

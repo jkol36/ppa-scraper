@@ -18,8 +18,10 @@ describe('store', () => {
       let { page } = store.getState()
       expect(page).to.not.be.undefined;
       expect(page).to.eq(1);
-      page = dispatch(changePage(2))
-      expect(page).to.eq(2)
-      done()
+      dispatch(changePage(2)).then(res => {
+        let {page} = store.getState()
+        expect(page).to.eq(2)
+        done()
+      })
     })
 })

@@ -3,11 +3,10 @@ import * as C from '../constants'
 
 export const changePage = (toPage) => dispatch => {
   return new Promise(resolve => {
-    dispatch({
+    resolve(dispatch({
         type: C.CHANGE_PAGE,
         page: toPage
-    })
-    resolve(toPage)
+    }))
   })
 
 }
