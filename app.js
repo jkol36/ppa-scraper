@@ -4,7 +4,13 @@ import { store } from './store';
 import  mongoose  from 'mongoose';
 import models from './models'
 import { initializeDatabase } from './config';
+import moment from 'moment'
+import fs from 'fs';
+import {parse} from 'json2csv';
+
+import path from 'path';
 require('dotenv').load()
+const json2csv = require('json2csv').parse
 
 
 
@@ -53,6 +59,22 @@ function removeDocuments(collection) {
     return mongoose.model(collection).remove()
 }
 
+const writeResultsToCsv = (results) => {
+    return new Promise(resolve => {
+      let csv = json2csv({data:results})
+      fs.writeFile('results.csv', csv, (err) => {
+        if(!err) {
+          resolve(results)
+        }
+      })
+    })
+  }
 initializeDatabase()
+.then(() => mongoose.model('customers').find())
+.then(customers => customers.map(customer => customer._doc))
+.then(customers => customers.map(costumer => JSON.stringify(costumer)))
+.then(customersAsJson => writeResultsToCsv(customersAsJson))
+.then(console.log)
+/* initializeDatabase()
 .then(removeDocuments.bind(this, 'customers'))
-.then(() => start())
+.then(() => start()) */

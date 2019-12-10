@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 
 
@@ -6,6 +6,7 @@ const customerSchema = mongoose.Schema({
 	id: Number,
 	created_at: String,
 	updated_at: String,
+	name: String
 }, {strict:false})
 
 
