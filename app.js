@@ -61,7 +61,7 @@ function removeDocuments(collection) {
 
 const writeResultsToCsv = (results) => {
     return new Promise(resolve => {
-      let csv = json2csv({data:results})
+      let csv = json2csv(results)
       fs.writeFile('results.csv', csv, (err) => {
         if(!err) {
           resolve(results)
@@ -72,7 +72,7 @@ const writeResultsToCsv = (results) => {
 initializeDatabase()
 .then(() => mongoose.model('customers').find())
 .then(customers => customers.map(customer => customer._doc))
-.then(customers => customers.map(costumer => JSON.stringify(costumer)))
+.then(customers => customers.map(costumer => costumer))
 .then(customersAsJson => writeResultsToCsv(customersAsJson))
 .then(console.log)
 /* initializeDatabase()
