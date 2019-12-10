@@ -38,8 +38,10 @@
     "bluebird": "^3.5.1",
     "dotenv": "^6.0.0",
     "mongoose": "^5.1.7",
+    "npm": "^6.13.3",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "start": "^5.1.0",
     "superagent": "^3.8.3",
     "superagent-bluebird-promise": "^4.2.0"
   }

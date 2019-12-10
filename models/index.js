@@ -1,1 +1,2 @@
 require('./customers');
+require('./badges')

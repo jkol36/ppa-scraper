@@ -1,0 +1,20 @@
+[{
+    id: 2419,
+    created_at: '12/09/2019',
+    updated_at: '12/09/2019',
+    name: 'Melissa Vitolo',
+    legacy_key: 'VIT08',
+    locations_string: 'AUTO PARK AT 2ND AND SANSOM',
+    locations: [
+      {
+        id: 14,
+        created_at: '09/16/2017',
+        updated_at: '09/16/2017',
+        name: 'AUTO PARK AT 2ND AND SANSOM',
+        address: '125 S. 2ND STREET ',
+        location: 'OLDE CITY',
+        comment: null,
+        url: 'http://garages.philapark.org/locations/14.json'
+      }
+    ]
+  }]
