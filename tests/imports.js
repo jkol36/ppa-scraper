@@ -1,11 +1,22 @@
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
-import {changePage, addLocation }  from '../actions'
+import {
+  changePage, 
+  addLocation }  from '../actions'
 import {
   createStore,
   combineReducers,
   applyMiddleware
 } from 'redux'
+import {
+  getLocations,
+  getBadges,
+  getReports,
+  getTransactionBadges,
+  getNamesDropdown,
+  getBatchReciepts,
+  fetchCustomers
+} from '../helpers';
 import customer from '../data/customer.json';
 import location from '../data/location.json';
 import report from '../data/report.json';
@@ -19,6 +30,35 @@ describe('imports', () => {
       expect(thunk).to.be.a.func;
       done()
     })
+    it('should import fetchCustomers', done => {
+      expect(fetchCustomers).to.be.a.func;
+      done()
+    })
+    it('should import getLocations', done => {
+      expect(getLocations).to.be.a.func;
+      done()
+    })
+    it('should import getBadges', done => {
+      expect(getBadges).to.be.a.func;
+      done()
+    })
+    it('should import getReports', done => {
+      expect(getReports).to.be.a.func;
+      done()
+    })
+    it('should import getTransactionBadges', done => {
+      expect(getTransactionBadges).to.be.a.func;
+      done()
+    })
+    it('should import getNamesDropdown', done => {
+      expect(getNamesDropdown).to.be.a.func;
+      done()
+    })
+    it('should import getBatchReciepts', done => {
+      expect(getBatchReciepts).to.be.a.func;
+      done()
+    })
+    
     it('should import add location', done => {
       expect(addLocation).to.not.be.undefined;
       expect(addLocation).to.be.a.func;

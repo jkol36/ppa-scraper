@@ -1,5 +1,8 @@
 import { fetchCustomers } from './helpers'
-import { addCustomer, changePage } from './actions';
+import { 
+    addCustomer, 
+    changePage, 
+    addLocation } from './actions';
 import { store } from './store';
 import  mongoose  from 'mongoose';
 import models from './models'
@@ -7,33 +10,31 @@ import { initializeDatabase } from './config';
 import moment from 'moment'
 import fs from 'fs';
 import {parse} from 'json2csv';
-
 import path from 'path';
-require('dotenv').load()
-const json2csv = require('json2csv').parse
+require('dotenv').load();
+const json2csv = require('json2csv').parse;
 
 
 
-function start(Customers) {
-    console.log('start called', store.getState().page)
+function startCustomerScrape() {
+    console.log('startCustomerScrape called', store.getState().page);
     const { page, customers } = store.getState();
-    console.log('customer length', customers.length)
+    console.log('customer length', customers.length);
     if(customers.length === 1369) {
         console.log(true)
         return saveCustomersInMongo().then(() => {
-            return mongoose.model('customers').countDocuments().then(console.log('saved mongo', count))
-        })
-    }
+            return mongoose.model('customers').countDocuments().then(console.log('saved mongo', count));
+        });
+    };
     const { dispatch } = store;
     fetchCustomers(page, 10)
     .map(customer => dispatch(addCustomer(customer)))
     .then(() => dispatch(changePage(page+1)))
-    .then(() => start())
+    .then(() => startCustomerScrape());
 }
 
 function saveCustomersInMongo() {
-    console.log('saving customers', store.getState().customers.length)
-    let saved = 0
+    console.log('saving customers', store.getState().customers.length);
     return new Promise(resolve => {
         return Promise.map(store.getState().customers, customer => {
             return mongoose
@@ -47,22 +48,22 @@ function saveCustomersInMongo() {
                     mongoose.model('customers').countDocuments().then(res => {
                         console.log(res, 'exiting')
                         process.exit()
-                    })
-                }
-            })
-        })
-    })
-    console.log('saving', store.getState().customers.length)
+                    });
+                };
+            });
+        });
+    });
 }
 
-function startLocations() {
+function startLocationScrape() {
     const {getState, dispatch} = store;
     const {page, locations} =  getState();
+    console.log(page, locations);
     
 }
 
 function removeDocuments(collection) {
-    return mongoose.model(collection).remove()
+    return mongoose.model(collection).remove();
 }
 
 const writeResultsToCsv = (results) => {
@@ -71,10 +72,11 @@ const writeResultsToCsv = (results) => {
       fs.writeFile('results.csv', csv, (err) => {
         if(!err) {
           resolve(results)
-        }
-      })
+        };
+      });
     })
   }
+  startLocationScrape()
 /* initializeDatabase()
 .then(() => mongoose.model('customers').find())
 .then(customers => customers.map(customer => customer._doc))
@@ -83,5 +85,5 @@ const writeResultsToCsv = (results) => {
 .then(console.log) */
 /* initializeDatabase()
 .then(removeDocuments.bind(this, 'customers'))
-.then(() => start()) */
+.then(() => startCustomerScrape()) */
 
