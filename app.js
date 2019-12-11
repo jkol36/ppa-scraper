@@ -1,8 +1,14 @@
-import { fetchCustomers, getLocations } from './helpers'
+import { 
+    fetchCustomers, 
+    getLocations, 
+    fetchBadges 
+} from './helpers'
 import { 
     addCustomer, 
     changePage, 
-    addLocation } from './actions';
+    addLocation,
+    addBadge
+ } from './actions';
 import { store } from './store';
 import  mongoose  from 'mongoose';
 import models from './models'
@@ -65,9 +71,17 @@ function startLocationScrape() {
     
 }
 
-function startBadgeScrope = () => {
+function startBadgeScrape () {
     const {getState, dispatch} = store;
     const {page, badges} = getState();
+    console.log(badges.length);
+    fetchBadges(page, 100)
+    .map(badge => dispatch(addBadge(badge)))
+    .then(() => mongoose.model('badges').countDocuments())
+    .then(console.log)
+    .then(() => dispatch(changePage(getState().page+1)))
+    .then(page => startBadgeScrape(page))
+    .catch(console.log)
 }
 
 function removeDocuments(collection) {
@@ -84,6 +98,14 @@ const writeResultsToCsv = (results, filename) => {
       });
     })
   }
+  initializeDatabase(process.env.DATABASE_URL)
+  .then(() => mongoose.model('badges').find())
+  .then(results => results.map(result => result._doc))
+  .then(results => results.map(result => result))
+  .then(resultsAsJson => writeResultsToCsv(resultsAsJson, 'badges'))
+  /* initializeDatabase(process.env.DATABASE_URL)
+  .then(startBadgeScrape)
+  .catch(console.log) */
  /*  initializeDatabase(process.env.DATABASE_URL)
   .then(() => mongoose.model('locations').countDocuments())
   .then(console.log)

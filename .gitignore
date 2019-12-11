@@ -2,3 +2,4 @@ node_modules/
 .DS_STORE
 results.csv
 locations.csv
+badges.csv

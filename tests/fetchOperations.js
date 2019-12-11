@@ -1,6 +1,6 @@
 import { 
   fetchCustomers, 
-  getBadges, 
+  fetchBadges, 
   getLocations, 
   getReports,
   getTransactionBadges,
@@ -29,18 +29,18 @@ describe('fetch operations', () => {
       })
     })
     it('should get badges', done => {
-      getBadges(1, 10)
+      fetchBadges(1, 10)
       .then(res => {
-        expect(res.body.data).to.be.an.array;
-        expect(res.body.data.length).to.be.gt(0);
-        expect(res.body.data[0].badge_number).to.not.be.null;
+        expect(res).to.be.an.array;
+        expect(res.length).to.be.gt(0);
+        expect(res[0].badge_number).to.not.be.null;
         done()
       })
     })
     it('should get reports', done => {
       getReports(1, 10)
       .then(res => {
-        expect(res.body.totalCount).to.be.gt(0)
+        expect(res.totalCount).to.be.gt(0)
         done()
       })
     })
@@ -64,8 +64,8 @@ describe('fetch operations', () => {
     it('should get batch reciepts', done => {
       getBatchReciepts()
       .then(res => {
-        expect(res.body).to.not.be.undefined;
-        expect(res.body).to.be.an.array;
+        expect(res).to.not.be.undefined;
+        expect(res).to.be.an.array;
         done()
       })
       .catch(done)

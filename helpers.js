@@ -21,11 +21,11 @@ export function getLocations() {
 }
 
 
-export function getBadges(page, count) {
+export function fetchBadges(page, count) {
     return agent
     .get(`http://garages.philapark.org/badges.json?page=${page}&perPage=${count}`)
     .set(headers)
-    .then(res => res)
+    .then(res => res.body.data)
     .catch(err => err)
 }
 
@@ -33,7 +33,7 @@ export function getReports(page, count){
     return agent
     .get(`http://garages.philapark.org/reports.json?page=${page}&perPage=${count}`)
     .set(headers)
-    .then(res => res)
+    .then(res => res.body)
     .catch(err => err)
 }
 
@@ -50,7 +50,7 @@ export function getNamesDropdown() {
     return agent
     .get(`http://garages.philapark.org/transaction_batches/location_names/names_dropdown.json`)
     .set(headers)
-    .then(res => res)
+    .then(res => res.body)
     .catch(err => err)
 }
 
@@ -58,6 +58,6 @@ export function getBatchReciepts() {
     return agent
     .get(`http://garages.philapark.org/reports/batch_reciepts.json`)
     .set(headers)
-    .then(res => res)
+    .then(res => res.body)
     .catch(err => err)
 }
