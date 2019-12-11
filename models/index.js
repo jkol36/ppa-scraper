@@ -1,2 +1,3 @@
 require('./customers');
-require('./badges')
+require('./badges');
+require('./locations');

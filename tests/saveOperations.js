@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { initializeDatabase } from '../config';
 import customer from '../data/customer.json';
-import location from '../data./location.json';
+import location from '../data/location.json';
 import mongoose  from 'mongoose';
 import models from '../models'; // required for models to be registered in mongo
 require('dotenv').load()
