@@ -1,6 +1,6 @@
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
-import {changePage}  from '../actions'
+import {changePage, addLocation }  from '../actions'
 import {
   createStore,
   combineReducers,
@@ -17,6 +17,11 @@ describe('imports', () => {
     it('should import redux thunk', done => {
       expect(thunk).to.not.be.undefined
       expect(thunk).to.be.a.func;
+      done()
+    })
+    it('should import add location', done => {
+      expect(addLocation).to.not.be.undefined;
+      expect(addLocation).to.be.a.func;
       done()
     })
     it('should import a transaction badge', done => {
