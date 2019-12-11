@@ -1,12 +1,13 @@
 import { expect } from 'chai';
 import { initializeDatabase } from '../config';
 import customer from '../data/customer.json';
+import location from '../data./location.json';
 import mongoose  from 'mongoose';
 import models from '../models'; // required for models to be registered in mongo
 require('dotenv').load()
 
 
-describe"saveOperations", () => {
+describe("saveOperations", () => {
   before(done => {
     initializeDatabase(process.env.TEST_DATABASE_URL)
     .then(() => done())
@@ -23,6 +24,17 @@ describe"saveOperations", () => {
         expect(customer).to.be.an.object;
         done()
       })
+    });
+    it('should save location in mongo', done => {
+      mongoose
+      .model('locations')
+      .create(location)
+      .then(location => location.save())
+      .then(location => {
+        expect(location).to.not.be.undefined;
+        expect(location).to.be.an.object;
+        done()
+      })
     })
-  })
+  });
     
