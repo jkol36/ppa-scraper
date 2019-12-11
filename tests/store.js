@@ -1,17 +1,28 @@
 import { store } from '../store';
 import { expect } from 'chai';
 import {changePage, addCustomer, addLocation } from '../actions';
-import customer from '../data/customer.json'
+import customer from '../data/customer.json';
+import { initializeDatabase } from '../config';
+import mongoose from 'mongoose';
 
 
 
 describe('store', () => {
+    before(done => {
+      initializeDatabase(process.env.TEST_DATABASE_URL)
+      .then(() => done())
+    });
+
+    after(done => {
+      mongoose.disconnect().then(() => done());
+    });
+
     it('should have an initial state', done => {
       let state = store.getState();
       expect(state).to.not.be.undefined;
       expect(state).to.be.an.object;
       done();
-    })
+    });
     it('should change page', done => {
       const { dispatch } = store;
       expect(dispatch).to.not.be.undefined;
@@ -23,7 +34,7 @@ describe('store', () => {
         expect(page).to.eq(2);
         done();
       })
-    })
+    });
     it('should add a customer', done => {
       const { dispatch } = store
       let {customers} = store.getState();
@@ -55,5 +66,5 @@ describe('store', () => {
         done()
       })
 
-    })
+    });
 })

@@ -23,8 +23,8 @@ describe('fetch operations', () => {
     it('should fetch locations', done => {
       getLocations()
       .then(res => {
-        expect(res.body).to.be.an.array;
-        expect(res.body[0].name).to.not.be.null;
+        expect(res).to.be.an.array;
+        expect(res[0].name).to.not.be.null;
         done()
       })
     })

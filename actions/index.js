@@ -1,5 +1,5 @@
-import { Mongoose } from "mongoose"
-import * as C from '../constants'
+import mongoose from "mongoose";
+import * as C from '../constants';
 
 export const changePage = (toPage) => dispatch => {
   return new Promise(resolve => {
@@ -21,10 +21,18 @@ export const addCustomer = customer => dispatch => {
 };
 
 export const addLocation = location => dispatch => {
-  return new Promise(resolve => {
-    resolve(dispatch({
-      type: C.LOCATION_ADDED,
-      location
-    }));
-  });
+  return mongoose
+    .model('locations')
+    .create(location)
+    .then(location => location.save())
+    .then(location => dispatch({type:C.LOCATION_ADDED, location}));
 };
+
+export const addBadge = location => dispatch => {
+  return mongoose
+    .model('badges')
+    .create(badge)
+    .then(badge => badge.save())
+    .then(badge => dispatch({type:C.BADGE_ADDED, badge}));
+};
+

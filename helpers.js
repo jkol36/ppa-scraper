@@ -16,7 +16,7 @@ export function getLocations() {
     return agent
     .get('http://garages.philapark.org/locations/show/all_min.json')
     .set(headers)
-    .then(res => res)
+    .then(res => res.body)
     .catch(err => err)
 }
 

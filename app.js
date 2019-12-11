@@ -1,4 +1,4 @@
-import { fetchCustomers } from './helpers'
+import { fetchCustomers, getLocations } from './helpers'
 import { 
     addCustomer, 
     changePage, 
@@ -11,6 +11,7 @@ import moment from 'moment'
 import fs from 'fs';
 import {parse} from 'json2csv';
 import path from 'path';
+import { start } from 'repl';
 require('dotenv').load();
 const json2csv = require('json2csv').parse;
 
@@ -58,30 +59,40 @@ function saveCustomersInMongo() {
 function startLocationScrape() {
     const {getState, dispatch} = store;
     const {page, locations} =  getState();
-    console.log(page, locations);
+    return getLocations()
+    .map(location => dispatch(addLocation(location)))
+    .then(() => process.exit())
     
+}
+
+function startBadgeScrope = () => {
+    const {getState, dispatch} = store;
+    const {page, badges} = getState();
 }
 
 function removeDocuments(collection) {
     return mongoose.model(collection).remove();
 }
 
-const writeResultsToCsv = (results) => {
+const writeResultsToCsv = (results, filename) => {
     return new Promise(resolve => {
       let csv = json2csv(results)
-      fs.writeFile('results.csv', csv, (err) => {
+      fs.writeFile(`${filename}.csv`, csv, (err) => {
         if(!err) {
           resolve(results)
         };
       });
     })
   }
-  startLocationScrape()
-/* initializeDatabase()
-.then(() => mongoose.model('customers').find())
-.then(customers => customers.map(customer => customer._doc))
-.then(customers => customers.map(costumer => costumer))
-.then(customersAsJson => writeResultsToCsv(customersAsJson))
+ /*  initializeDatabase(process.env.DATABASE_URL)
+  .then(() => mongoose.model('locations').countDocuments())
+  .then(console.log)
+  .catch(console.log); */
+/* initializeDatabase(process.env.DATABASE_URL)
+.then(() => mongoose.model('locations').find())
+.then(locations => locations.map(location => location._doc))
+.then(locations => locations.map(location => location))
+.then(locationsAsJson => writeResultsToCsv(locationsAsJson, 'locations'))
 .then(console.log) */
 /* initializeDatabase()
 .then(removeDocuments.bind(this, 'customers'))
