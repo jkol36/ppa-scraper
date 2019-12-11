@@ -7,11 +7,13 @@ import {
   import {
     customers,
     page,
-    locations
+    locations,
+    badges
   } from './reducers'
   
   export const store = createStore(combineReducers({
     customers,
     page,
-    locations
+    locations,
+    badges
   }), applyMiddleware(thunk));

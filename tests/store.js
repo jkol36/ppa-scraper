@@ -1,7 +1,13 @@
 import { store } from '../store';
 import { expect } from 'chai';
-import {changePage, addCustomer, addLocation } from '../actions';
+import {
+  changePage, 
+  addCustomer, 
+  addLocation,
+  addBadge 
+} from '../actions';
 import customer from '../data/customer.json';
+import badge from '../data/badge.json';
 import { initializeDatabase } from '../config';
 import mongoose from 'mongoose';
 
@@ -67,4 +73,12 @@ describe('store', () => {
       })
 
     });
+    it('should add a badge', done => {
+      const {dispatch, getState} = store;
+      dispatch(addBadge(badge))
+      .then(res => {
+        expect(getState().badges.length).to.eq(1)
+        done()
+      })
+    })
 })

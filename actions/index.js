@@ -28,7 +28,7 @@ export const addLocation = location => dispatch => {
     .then(location => dispatch({type:C.LOCATION_ADDED, location}));
 };
 
-export const addBadge = location => dispatch => {
+export const addBadge = badge => dispatch => {
   return mongoose
     .model('badges')
     .create(badge)
