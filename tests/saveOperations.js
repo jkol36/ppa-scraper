@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { initializeDatabase } from '../config';
 import customer from '../data/customer.json';
 import location from '../data/location.json';
+import batchReciept from '../data/batchReciept';
 import mongoose  from 'mongoose';
 import models from '../models'; // required for models to be registered in mongo
 require('dotenv').load()
@@ -34,6 +35,17 @@ describe("saveOperations", () => {
         expect(location).to.not.be.undefined;
         expect(location).to.be.an.object;
         done()
+      })
+    })
+    it('should save a batch reciept', done => {
+      mongoose
+      .model('batchReceipts')
+      .create(batchReciept)
+      .then(batchReciept => batchReciept.save())
+      .then(batchReceipt => {
+        expect(batchReceipt).to.not.be.undefined;
+        expect(batchReceipt).to.be.an.object;
+        done();
       })
     })
   });

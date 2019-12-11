@@ -8,7 +8,6 @@ import customer from '../data/customer.json'
 describe('store', () => {
     it('should have an initial state', done => {
       let state = store.getState();
-      console.log(state);
       expect(state).to.not.be.undefined;
       expect(state).to.be.an.object;
       done();
@@ -33,7 +32,6 @@ describe('store', () => {
       dispatch(addCustomer(customer)).then(() => {
         customers = store.getState().customers
         expect(customers.length).to.eq(1)
-        console.log(customers)
         done()
       })
     });
