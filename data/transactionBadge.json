@@ -1,0 +1,12 @@
+{
+    "id": 7629,
+    "current": 0,
+    "total": 1,
+    "finished": true,
+    "created_at": "12/09/2019",
+    "updated_at": "12/09/2019",
+    "human_batch_types": "Invoice",
+    "name": "Batch for Benjamin Franklin Bridge",
+    "start_date": "12/01/2019",
+    "end_date": "12/31/201"
+}

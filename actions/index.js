@@ -7,16 +7,25 @@ export const changePage = (toPage) => dispatch => {
     resolve(dispatch({
         type: C.CHANGE_PAGE,
         page: toPage
-    }))
-  })
+    }));
+  });
 
-}
+};
 
 export const addCustomer = customer => dispatch => {
   return new Promise(resolve => {
     resolve(dispatch({
       type: C.CUSTOMER_ADDED,
       customer
-    }))
-  })
-}
+    }));
+  });
+};
+
+export const addLocation = location => dispatch => {
+  return new Promise(resolve => {
+    resolve(dispatch({
+      type: C.LOCATION_ADDED,
+      location
+    }));
+  });
+};

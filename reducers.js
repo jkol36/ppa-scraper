@@ -19,3 +19,12 @@ export const page = (state=1, action) => {
   }
 }
 
+export const locations = (state=[], action) => {
+  switch(action.type) {
+    case C.LOCATION_ADDED:
+      return [...state, action.location]
+    default:
+      return state;
+  }
+}
+

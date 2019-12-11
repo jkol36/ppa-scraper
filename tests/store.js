@@ -1,6 +1,6 @@
 import { store } from '../store';
 import { expect } from 'chai';
-import {changePage, addCustomer} from '../actions';
+import {changePage, addCustomer, addLocation } from '../actions';
 import customer from '../data/customer.json'
 
 
@@ -36,5 +36,26 @@ describe('store', () => {
         console.log(customers)
         done()
       })
+    });
+    it('should add a location', done => {
+      const { dispatch, getState } = store;
+      const {locations} = getState();
+      expect(locations).to.be.an.array;
+      let location = {
+        id:1,
+        created_at: '08/18/2017',
+        updated_at: '08/18/2017',
+        name: 'Family Courthouse Garage',
+        address: '1503-11 Arch Street',
+        location: 'Family Court ',
+        comment: null,
+        url: 'http://garages.philapark.org/locations/1.json'
+      }
+      dispatch(addLocation(location))
+      .then(() => {
+        expect(getState().locations.length).to.eq(1);
+        done()
+      })
+
     })
 })

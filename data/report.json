@@ -1,0 +1,22 @@
+{
+    "id": 4,
+    "name": "batch_reciepts",
+    "display_name": "Batch reciepts",
+    "description": "Report on all deposits",
+    "parameters": [
+      { "label": "Start Date", "type": "datepicker", "field": "start_date" },
+      { "label": "End Date", "type": "datepicker", "field": "end_date" },
+      {
+        "label": "Location Name",
+        "type": "typeahead",
+        "field": "location_name_query",
+        "url": "/locations/typeahead/name.json"
+      },
+      {
+        "label": "Batch Number",
+        "type": "typeahead",
+        "field": "batch_number_query",
+        "url": "/transaction_batches/deposits/batch_ids.json"
+      }
+    ]
+  }

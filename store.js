@@ -6,11 +6,12 @@ import {
   import thunk from 'redux-thunk'
   import {
     customers,
-    page
+    page,
+    locations
   } from './reducers'
   
   export const store = createStore(combineReducers({
     customers,
-    page
-
+    page,
+    locations
   }), applyMiddleware(thunk));
